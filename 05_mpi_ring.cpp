@@ -15,7 +15,7 @@ int main(int argc, char **argv) {
         value = 1;
         MPI_Send(&value, 1, MPI_INT, next, 0, MPI_COMM_WORLD);
         MPI_Recv(&value, 1, MPI_INT, prev, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        cout << "Ring completed. Value = " << value << '\n';
+        cout << "Ring completed. Value = " << value << '\\n';
     } else {
         MPI_Recv(&value, 1, MPI_INT, prev, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         value++;
@@ -24,3 +24,6 @@ int main(int argc, char **argv) {
 
     MPI_Finalize();
 }
+
+// Compile and run with 4 MPI processes:
+// mpic++ -O2 05_mpi_ring.cpp -o p5 && mpirun -np 4 ./p5
