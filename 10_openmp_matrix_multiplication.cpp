@@ -16,6 +16,9 @@ int main() {
 
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) cout << c[i][j] << ' ';
-        cout << '\n';
+        cout << '\\n';
     }
 }
+
+// Compile and run:
+// g++ -O2 -fopenmp 10_openmp_matrix_multiplication.cpp -o p10 && ./p10
