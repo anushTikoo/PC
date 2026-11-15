@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
     vector<int> all = {9, 3, 7, 1, 8, 2, 6, 4};
     int n = all.size();
     if (n % size != 0) {
-        if (rank == 0) cerr << "Array size must be divisible by process count.\n";
+        if (rank == 0) cerr << "Array size must be divisible by process count.\\n";
         MPI_Abort(MPI_COMM_WORLD, 1);
     }
 
@@ -43,8 +43,11 @@ int main(int argc, char **argv) {
     if (rank == 0) {
         cout << "Sorted: ";
         for (int x : all) cout << x << ' ';
-        cout << '\n';
+        cout << '\\n';
     }
 
     MPI_Finalize();
 }
+
+// Compile and run with 4 MPI processes (array size must be divisible by 4):
+// mpic++ -O2 07_mpi_odd_even_sort.cpp -o p7 && mpirun -np 4 ./p7
