@@ -77,7 +77,10 @@ int main(int argc, char **argv) {
     if (rank == 0) {
         cout << "Sorted: ";
         for (int x : result) cout << x << ' ';
-        cout << '\n';
+        cout << '\\n';
     }
     MPI_Finalize();
 }
+
+// Compile and run with 4 MPI processes (use a power-of-two process count):
+// mpic++ -O2 08_mpi_hyperquicksort.cpp -o p8 && mpirun -np 4 ./p8
