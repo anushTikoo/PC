@@ -31,7 +31,7 @@ int main() {
                         done = 1;
                     }
                 }
-                cout << "Consumed: " << value << '\\n';
+                cout << "Consumed: " << value << '\n';
             }
         }
     }
