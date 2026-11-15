@@ -18,29 +18,33 @@ jobs:
       - name: Compile OpenMP programs
         run: |
           set -eux
-          for f in 01_openmp_pi.cpp 02_openmp_largest.cpp 03_openmp_primes.cpp 09_openmp_producer_consumer.cpp 10_openmp_matrix_multiplication.cpp; do
-            g++ -std=c++17 -O2 -Wall -Wextra -fopenmp "$f" -o "/tmp/${f%.cpp}"
-          done
+          g++ -std=c++17 -O2 -Wall -Wextra -fopenmp "OpenMP Pi Calculation/1.cpp" -o /tmp/1
+          g++ -std=c++17 -O2 -Wall -Wextra -fopenmp "OpenMP Largest Element/2.cpp" -o /tmp/2
+          g++ -std=c++17 -O2 -Wall -Wextra -fopenmp "OpenMP Prime Number Generation/3.cpp" -o /tmp/3
+          g++ -std=c++17 -O2 -Wall -Wextra -fopenmp "OpenMP Producer Consumer/9.cpp" -o /tmp/9
+          g++ -std=c++17 -O2 -Wall -Wextra -fopenmp "OpenMP Matrix Multiplication/10.cpp" -o /tmp/10
       - name: Run OpenMP programs
         run: |
           set -eux
-          OMP_NUM_THREADS=4 timeout 30s /tmp/01_openmp_pi
-          OMP_NUM_THREADS=4 timeout 30s /tmp/02_openmp_largest
-          OMP_NUM_THREADS=4 timeout 30s /tmp/03_openmp_primes 100
-          OMP_NUM_THREADS=2 timeout 30s /tmp/09_openmp_producer_consumer
-          OMP_NUM_THREADS=4 timeout 30s /tmp/10_openmp_matrix_multiplication
+          OMP_NUM_THREADS=4 timeout 30s /tmp/1
+          OMP_NUM_THREADS=4 timeout 30s /tmp/2
+          printf '100\n' | OMP_NUM_THREADS=4 timeout 30s /tmp/3
+          OMP_NUM_THREADS=2 timeout 30s /tmp/9
+          OMP_NUM_THREADS=4 timeout 30s /tmp/10
       - name: Compile MPI programs
         run: |
           set -eux
-          for f in 04_mpi_pi.cpp 05_mpi_ring.cpp 06_mpi_trapezoidal_x2.cpp 07_mpi_odd_even_sort.cpp 08_mpi_hyperquicksort.cpp; do
-            mpic++ -std=c++17 -O2 -Wall -Wextra "$f" -o "/tmp/${f%.cpp}"
-          done
+          mpic++ -std=c++17 -O2 -Wall -Wextra "MPI Pi Calculation/4.cpp" -o /tmp/4
+          mpic++ -std=c++17 -O2 -Wall -Wextra "MPI Ring Communication/5.cpp" -o /tmp/5
+          mpic++ -std=c++17 -O2 -Wall -Wextra "MPI Trapezoidal Rule Integration/6.cpp" -o /tmp/6
+          mpic++ -std=c++17 -O2 -Wall -Wextra "MPI Odd-Even Transposition Sort/7.cpp" -o /tmp/7
+          mpic++ -std=c++17 -O2 -Wall -Wextra "MPI Hyperquicksort/8.cpp" -o /tmp/8
       - name: Run MPI programs
         env:
           OMPI_ALLOW_RUN_AS_ROOT: "1"
           OMPI_ALLOW_RUN_AS_ROOT_CONFIRM: "1"
         run: |
           set -eux
-          for f in 04_mpi_pi 05_mpi_ring 06_mpi_trapezoidal_x2 07_mpi_odd_even_sort 08_mpi_hyperquicksort; do
+          for f in 4 5 6 7 8; do
             timeout 30s mpirun --oversubscribe -np 4 "/tmp/$f"
           done
