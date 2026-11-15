@@ -14,7 +14,7 @@ bool prime(int n) {
 int main(int argc, char *argv[]) {
     int n = (argc > 1) ? atoi(argv[1]) : 50;
     if (n < 2) {
-        cout << '\n';
+        cout << '\\n';
         return 0;
     }
 
@@ -25,5 +25,8 @@ int main(int argc, char *argv[]) {
 
     for (int i = 2; i <= n; i++)
         if (isPrime[i]) cout << i << ' ';
-    cout << '\n';
+    cout << '\\n';
 }
+
+// Compile and run (optional upper limit; defaults to 50):
+// g++ -O2 -fopenmp 03_openmp_primes.cpp -o p3 && ./p3 100
