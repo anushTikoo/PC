@@ -12,7 +12,7 @@ int main() {
         sum += 4.0 / (1.0 + x * x);
     }
 
-    cout << "Pi = " << sum / n << '\\n';
+    cout << "Pi = " << sum / n << '\n';
 }
 
 // Compile and run:
