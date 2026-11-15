@@ -1,0 +1,46 @@
+name: Compile and run lab programs
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install compilers
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y g++ openmpi-bin libopenmpi-dev
+      - name: Compile OpenMP programs
+        run: |
+          set -eux
+          for f in 01_openmp_pi.cpp 02_openmp_largest.cpp 03_openmp_primes.cpp 09_openmp_producer_consumer.cpp 10_openmp_matrix_multiplication.cpp; do
+            g++ -std=c++17 -O2 -Wall -Wextra -fopenmp "$f" -o "/tmp/${f%.cpp}"
+          done
+      - name: Run OpenMP programs
+        run: |
+          set -eux
+          OMP_NUM_THREADS=4 timeout 30s /tmp/01_openmp_pi
+          OMP_NUM_THREADS=4 timeout 30s /tmp/02_openmp_largest
+          OMP_NUM_THREADS=4 timeout 30s /tmp/03_openmp_primes 100
+          OMP_NUM_THREADS=2 timeout 30s /tmp/09_openmp_producer_consumer
+          OMP_NUM_THREADS=4 timeout 30s /tmp/10_openmp_matrix_multiplication
+      - name: Compile MPI programs
+        run: |
+          set -eux
+          for f in 04_mpi_pi.cpp 05_mpi_ring.cpp 06_mpi_trapezoidal_x2.cpp 07_mpi_odd_even_sort.cpp 08_mpi_hyperquicksort.cpp; do
+            mpic++ -std=c++17 -O2 -Wall -Wextra "$f" -o "/tmp/${f%.cpp}"
+          done
+      - name: Run MPI programs
+        env:
+          OMPI_ALLOW_RUN_AS_ROOT: "1"
+          OMPI_ALLOW_RUN_AS_ROOT_CONFIRM: "1"
+        run: |
+          set -eux
+          for f in 04_mpi_pi 05_mpi_ring 06_mpi_trapezoidal_x2 07_mpi_odd_even_sort 08_mpi_hyperquicksort; do
+            timeout 30s mpirun --oversubscribe -np 4 "/tmp/$f"
+          done
