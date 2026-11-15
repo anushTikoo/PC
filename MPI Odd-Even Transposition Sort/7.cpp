@@ -1,6 +1,4 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
+#include <bits/stdc++.h>
 #include <mpi.h>
 using namespace std;
 
@@ -50,7 +48,7 @@ int main(int argc, char **argv) {
 }
 
 // Compile and run with 4 MPI processes (array size must be divisible by 4):
-// mpic++ -O2 07_mpi_odd_even_sort.cpp -o p7 && mpirun -np 4 ./p7
+// mpic++ -O2 7.cpp -o 7 && mpirun -np 4 ./7
 
 // WINDOWS SETUP (run once):
 // 1. In Administrator PowerShell, install Ubuntu: wsl --install -d Ubuntu

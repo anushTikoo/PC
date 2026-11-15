@@ -1,6 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include <bits/stdc++.h>
 #include <mpi.h>
 using namespace std;
 
@@ -83,7 +81,7 @@ int main(int argc, char **argv) {
 }
 
 // Compile and run with 4 MPI processes (use a power-of-two process count):
-// mpic++ -O2 08_mpi_hyperquicksort.cpp -o p8 && mpirun -np 4 ./p8
+// mpic++ -O2 8.cpp -o 8 && mpirun -np 4 ./8
 
 // WINDOWS SETUP (run once):
 // 1. In Administrator PowerShell, install Ubuntu: wsl --install -d Ubuntu

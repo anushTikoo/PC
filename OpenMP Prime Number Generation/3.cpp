@@ -1,21 +1,38 @@
-#include <iostream>
-#include <algorithm>
+#include <bits/stdc++.h>
 #include <omp.h>
 using namespace std;
 
+bool prime(int n) {
+    if (n < 2) return false;
+    for (int i = 2; i * i <= n; i++)
+        if (n % i == 0) return false;
+    return true;
+}
+
 int main() {
-    int a[] = {12, 45, 7, 89, 23, 56, 91, 3};
-    int n = sizeof(a) / sizeof(a[0]), largest = a[0];
+    int n;
+    cout << "Enter the upper limit: ";
+    cin >> n;
 
-    #pragma omp parallel for reduction(max:largest)
-    for (int i = 0; i < n; i++)
-        largest = max(largest, a[i]);
+    if (n < 2) {
+        cout << "There are no prime numbers in this range.\n";
+        return 0;
+    }
 
-    cout << "Largest = " << largest << '\\n';
+    vector<char> isPrime(n + 1, false);
+
+    #pragma omp parallel for
+    for (int i = 2; i <= n; i++)
+        isPrime[i] = prime(i);
+
+    cout << "Prime numbers up to " << n << ": ";
+    for (int i = 2; i <= n; i++)
+        if (isPrime[i]) cout << i << ' ';
+    cout << '\n';
 }
 
 // Compile and run:
-// g++ -O2 -fopenmp 02_openmp_largest.cpp -o p2 && ./p2
+// g++ -O2 -fopenmp 3.cpp -o 3 && ./3
 
 // WINDOWS SETUP (run once):
 // 1. In Administrator PowerShell, install Ubuntu: wsl --install -d Ubuntu

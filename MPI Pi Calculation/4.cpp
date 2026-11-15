@@ -1,4 +1,4 @@
-#include <iostream>
+#include <bits/stdc++.h>
 #include <mpi.h>
 using namespace std;
 
@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
 }
 
 // Compile and run with 4 MPI processes:
-// mpic++ -O2 04_mpi_pi.cpp -o p4 && mpirun -np 4 ./p4
+// mpic++ -O2 4.cpp -o 4 && mpirun -np 4 ./4
 
 // WINDOWS SETUP (run once):
 // 1. In Administrator PowerShell, install Ubuntu: wsl --install -d Ubuntu

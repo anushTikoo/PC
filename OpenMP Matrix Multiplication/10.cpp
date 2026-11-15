@@ -1,22 +1,27 @@
-#include <iostream>
+#include <bits/stdc++.h>
 #include <omp.h>
 using namespace std;
 
 int main() {
-    const long long n = 1000000;
-    double sum = 0.0;
+    const int n = 2;
+    int a[n][n] = {{1, 2}, {3, 4}};
+    int b[n][n] = {{5, 6}, {7, 8}};
+    int c[n][n] = {};
 
-    #pragma omp parallel for reduction(+:sum)
-    for (long long i = 0; i < n; i++) {
-        double x = (i + 0.5) / n;
-        sum += 4.0 / (1.0 + x * x);
+    #pragma omp parallel for
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            for (int k = 0; k < n; k++)
+                c[i][j] += a[i][k] * b[k][j];
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) cout << c[i][j] << ' ';
+        cout << '\n';
     }
-
-    cout << "Pi = " << sum / n << '\n';
 }
 
 // Compile and run:
-// g++ -O2 -fopenmp 01_openmp_pi.cpp -o p1 && ./p1
+// g++ -O2 -fopenmp 10.cpp -o 10 && ./10
 
 // WINDOWS SETUP (run once):
 // 1. In Administrator PowerShell, install Ubuntu: wsl --install -d Ubuntu

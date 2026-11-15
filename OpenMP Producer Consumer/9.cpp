@@ -1,4 +1,4 @@
-#include <iostream>
+#include <bits/stdc++.h>
 #include <omp.h>
 using namespace std;
 
@@ -38,7 +38,7 @@ int main() {
 }
 
 // Compile and run:
-// g++ -O2 -fopenmp 09_openmp_producer_consumer.cpp -o p9 && ./p9
+// g++ -O2 -fopenmp 9.cpp -o 9 && ./9
 
 // WINDOWS SETUP (run once):
 // 1. In Administrator PowerShell, install Ubuntu: wsl --install -d Ubuntu
