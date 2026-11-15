@@ -12,5 +12,8 @@ int main() {
         sum += 4.0 / (1.0 + x * x);
     }
 
-    cout << "Pi = " << sum / n << '\n';
+    cout << "Pi = " << sum / n << '\\n';
 }
+
+// Compile and run:
+// g++ -O2 -fopenmp 01_openmp_pi.cpp -o p1 && ./p1
