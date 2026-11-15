@@ -77,7 +77,7 @@ int main(int argc, char **argv) {
     if (rank == 0) {
         cout << "Sorted: ";
         for (int x : result) cout << x << ' ';
-        cout << '\\n';
+        cout << '\n';
     }
     MPI_Finalize();
 }
