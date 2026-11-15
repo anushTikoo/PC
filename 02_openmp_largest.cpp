@@ -11,7 +11,7 @@ int main() {
     for (int i = 0; i < n; i++)
         largest = max(largest, a[i]);
 
-    cout << "Largest = " << largest << '\\n';
+    cout << "Largest = " << largest << '\n';
 }
 
 // Compile and run:
