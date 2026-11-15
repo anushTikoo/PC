@@ -1,31 +1,17 @@
 #include <iostream>
-#include <vector>
 #include <algorithm>
 #include <omp.h>
 using namespace std;
 
 int main() {
-    int n;
-    cout << "Enter number of elements: ";
-    cin >> n;
-
-    if (n <= 0) {
-        cout << "Please enter a positive number of elements.\n";
-        return 1;
-    }
-
-    vector<int> a(n);
-    cout << "Enter " << n << " elements:\n";
-    for (int i = 0; i < n; i++)
-        cin >> a[i];
-
-    int largest = a[0];
+    int a[] = {12, 45, 7, 89, 23, 56, 91, 3};
+    int n = sizeof(a) / sizeof(a[0]), largest = a[0];
 
     #pragma omp parallel for reduction(max:largest)
     for (int i = 0; i < n; i++)
         largest = max(largest, a[i]);
 
-    cout << "Largest = " << largest << '\n';
+    cout << "Largest = " << largest << '\\n';
 }
 
 // Compile and run:
