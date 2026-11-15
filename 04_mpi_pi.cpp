@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
 
     double local = sum / n;
     MPI_Reduce(&local, &pi, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
-    if (rank == 0) cout << "Pi = " << pi << '\\n';
+    if (rank == 0) cout << "Pi = " << pi << '\n';
 
     MPI_Finalize();
 }
