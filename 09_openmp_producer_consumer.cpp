@@ -31,8 +31,11 @@ int main() {
                         done = 1;
                     }
                 }
-                cout << "Consumed: " << value << '\n';
+                cout << "Consumed: " << value << '\\n';
             }
         }
     }
 }
+
+// Compile and run:
+// g++ -O2 -fopenmp 09_openmp_producer_consumer.cpp -o p9 && ./p9
