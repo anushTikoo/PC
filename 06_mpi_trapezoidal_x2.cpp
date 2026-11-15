@@ -18,7 +18,10 @@ int main(int argc, char **argv) {
     }
 
     MPI_Reduce(&local, &total, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
-    if (rank == 0) cout << "Integral = " << total << '\n';
+    if (rank == 0) cout << "Integral = " << total << '\\n';
 
     MPI_Finalize();
 }
+
+// Compile and run with 4 MPI processes:
+// mpic++ -O2 06_mpi_trapezoidal_x2.cpp -o p6 && mpirun -np 4 ./p6
